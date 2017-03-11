@@ -1,0 +1,30 @@
+
+<div class="container-fluid my-4">
+  <div class="row no-gutters">
+    <div class="col col-2">
+      <!-- Decrement Range Slider -->
+      <button type="button" class="btn btn-link"
+        ng-disabled="slider.model == slider.min"
+        ng-click="slider.decrease()">
+        <i class="ion-minus"></i>
+      </button>
+      <small ng-bind="{{slider.min}}" class="d-block"></small>
+    </div>
+
+    <div class="col pt-2">
+      <input class="input-range" type="range"
+        ng-model="slider.model"
+        step="1" min="{{slider.min}}" max="{{slider.max}}">
+    </div>
+
+    <div class="col col-2">
+      <!-- Increment Range Slider -->
+      <button type="button" class="btn btn-link"
+        ng-disabled="slider.model == slider.max"
+        ng-click="slider.increase()">
+        <i class="ion-plus"></i>
+      </button>
+      <small ng-bind="{{slider.max}}" class="d-block"></small>
+    </div>
+  </div>
+</div><!-- end of .d-block -->

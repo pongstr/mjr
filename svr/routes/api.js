@@ -22,15 +22,31 @@ router.route('/products/').get((req, res, next) => {
     const snapshot = data.val()
     const products = []
 
-    // Process base product information
-    // into a robust useful initial data
-    // for display.
-    for (let id in snapshot) {
+    // Check to see if Products Table is empty
+    if (!snapshot) return next()
+
+    // Process Products and add current time to it context
+    for (const id in snapshot) {
       products.push(new Product(snapshot[id], id))
     }
 
     // Return processed products here.
     res.json(products)
+  })
+}, (req, res, next) => {
+  res.send({response: 200, message: 'Products Table is Empty.'})
+})
+
+router.route('/products/:id').get((req, res, next) => {
+  firebase.ref('products').child(req.params.id).once('value', (data) => {
+    const product = data.val()
+    if (!product) return next()
+    res.send(new Product(product, product.id))
+  })
+}, (req, res, next) => {
+  res.send({
+    response: 204,
+    message: 'This is not the product you are looking for.'
   })
 })
 

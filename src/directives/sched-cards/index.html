@@ -1,0 +1,22 @@
+
+<div class="row no-gutters row--custom">
+  <div class="col-6" ng-repeat="payment in model track by $index">
+    <div class="d-flex rounded">
+      <div class="p-2 align-self-center" ng-bind="$index + 1"></div>
+      <div class="p-2">
+        <p class="m-0">
+          <small>
+            <span class="text-muted">Repay:</span> &nbsp;
+            <strong ng-bind="static"></strong><strong ng-bind="payment.amount_due"></strong>
+          </small>
+        </p>
+        <p class="m-0">
+          <small class="d-block">
+            <span class="text-muted">Due:</span> &nbsp;
+            <strong class="float-right" ng-bind="payment.date|moment:'short'"></strong>
+          </small>
+        </p>
+      </div><!-- end of .p-2 -->
+    </div><!-- end of .d-flex.rounded -->
+  </div><!-- end of .col-6 [ng-repeat] -->
+</div><!-- end of .row -->

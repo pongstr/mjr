@@ -49,7 +49,10 @@ gulp.task('styles', (done) => {
   const minify = !gutil.env.minify ? true : gutil.env.minify
   const sassopts = {
     outputStyle: 'expanded',
-    includePaths: require('bourbon').includePaths
+    includePaths: [
+      require('bourbon').includePaths,
+      './node_modules/bootstrap/scss'
+    ]
   }
   gulp.src('./src/sass/app.scss')
     .pipe(gulpif(minify, srcmap.init()))
