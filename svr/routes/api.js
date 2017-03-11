@@ -22,16 +22,19 @@ router.route('/products/').get((req, res, next) => {
     const snapshot = data.val()
     const products = []
 
-    // Process base product information
-    // into a robust useful initial data
-    // for display.
-    for (let id in snapshot) {
+    // Check to see if Products Table is empty
+    if (!snapshot) return next()
+
+    // Process Products and add current time to it context
+    for (const id in snapshot) {
       products.push(new Product(snapshot[id], id))
     }
 
     // Return processed products here.
     res.json(products)
   })
+}, (req, res, next) => {
+  res.send({response: 200, message: 'Products Table is Empty.'})
 })
 
 module.exports = router

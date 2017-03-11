@@ -1,0 +1,23 @@
+// #==
+// Bootstrap Overrides
+
+@import "bourbon";
+@import "bootstrap";
+
+.text-muted--opacity { opacity: 0.45; }
+.btn.btn-link { cursor: pointer; }
+
+.card--custom {
+  background-color: $gray-dark;
+  border-color: darken($gray-dark, 5%);
+  border-radius: 0;
+  box-shadow: 0 0 48px -6px rgba($gray-dark, 0.95);
+
+  .form-control {
+    color: $gray-lighter;
+    background-color: lighten($gray-dark, 5%);
+  }
+
+  .btn.btn-lg,
+  .form-control { border-radius: 3px; }
+}

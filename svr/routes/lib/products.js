@@ -19,8 +19,11 @@ module.exports = class Products {
     this.ctx = context
     this._id = id
 
-    return Object.assign(context, {
-      _id: productId, instalments: this.getInstallments()
+    return Object.assign({}, context, {
+      _id: id,
+      instalments: this.getInstallments(),
+      payment_count: this.getPaymentCount(context.productId, context.payment_cycle),
+      max_duration: moment(this.getStartDate()).add(context.productId, 'months')
     })
   }
 
@@ -68,6 +71,17 @@ module.exports = class Products {
   }
 
   /**
+   * @method  GetPaymentCount
+   * @desc    payment cycle in number
+   * @return  {Number} number of days or months
+   */
+  getPaymentCount (product, frequency) {
+    const start_date = moment(this.getStartDate())
+    const end_date   = moment(this.getStartDate()).add(product, 'months')
+    return end_date.diff(start_date, frequency)
+  }
+
+  /**
    * @method GetInstallments
    * @desc  The proper spelling is `instalment`, but I find it very hard to
    *    get use to it, I know it's wrong but for the sake of not thinking
@@ -80,6 +94,10 @@ module.exports = class Products {
    *    current product.
    */
   getInstallments () {
+    // if (this.ctx.payment_cycle === 'days') {
+    //   return null
+    // }
+
     const that = this
     const ctx  = that.ctx
 
@@ -100,7 +118,7 @@ module.exports = class Products {
       : {label: 'months', length: ctx.productId}
 
     // Principal Amount
-    let principal = parseFloat(ctx.amount)
+    let principal = parseFloat(ctx.principal)
     // Interest Rate  (Monthly/Daily)
 
     let interest = this.getInterest()
@@ -143,9 +161,7 @@ module.exports = class Products {
     return [
       ...new Array(term.length).fill().map((obj, idx, arr) => {
         return {
-          date_str: moment(start_date).add(idx, term.label).format('dddd, MMMM DD, YYYY'),
-          date_iso: moment(start_date).add(idx, term.label).toISOString(),
-          amount_display: ctx.currency.SYM + ' ' + amount_due,
+          date: moment(start_date).add(idx, term.label).toISOString(),
           amount_due, amount_total, amount_interest
         }
       })
