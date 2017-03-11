@@ -8,8 +8,9 @@ import createResource from './services/api'
 import MainController from './app.controller'
 import AuthService    from './services/auth'
 
-import {LoanCompute}  from './components/compute/index'
 import rangeSlider    from './directives/range-slider/index'
+import {LoanCompute}  from './components/compute/index'
+import {momentFilter}      from './app.utils'
 
 // #==
 // See Firebase Documentation for Web Setup
@@ -47,4 +48,5 @@ app.controller('Ctrl.Main', MainController)
 app.component('loanCompute', LoanCompute)
 app.directive('rangeSlider', rangeSlider)
 app.factory('products', createResource('products'))
+app.filter('moment', momentFilter)
 app.service('AuthService', AuthService)

@@ -26,10 +26,8 @@ router.route('/products/').get((req, res, next) => {
     if (!snapshot) return next()
 
     // Process Products and add current time to it context
-    for (let id in snapshot) {
-      ;(req.query && req.query.calc === 'true')
-        ? products.push(new Product(snapshot[id], id, true))
-        : products.push(new Product(snapshot[id], id, null))
+    for (const id in snapshot) {
+      products.push(new Product(snapshot[id], id))
     }
 
     // Return processed products here.

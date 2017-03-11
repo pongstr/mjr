@@ -1,28 +1,77 @@
 <div class="card">
-  <uib-tabset>
-    <uib-tab
-      ng-repeat="product in cm.collection"
-      heading="{{product.name}}">
-      <div class="d-block pa-4">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item" ng-repeat="product in cm.collection">
+        <a href="#"
+          ng-click="cm.selectProduct(product, $index)"
+          ng-class="cm.$selected == $index ? 'nav-link active ' : 'nav-link'">
+          <span ng-bind="product.name"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-block">
+    <div class="tab-content">
+      <div
+        ng-repeat="product in cm.collection track by $index"
+        ng-class="cm.$selected == $index ? 'tab-pane active' : 'tab-pane'">
+        <div class="row">
+          <div class="col-6 text-center">
+            <h4 class="lead">I would like to Borrow</h4>
+            <h5 class="h4" ng-bind="product.currency.SYM + product.principal"></h5>
 
-        <h2 ng-bind="product.principal"></h2>
-        <range-slider model="product.principal"
-          step="5"
-          min="{{product.min_amount}}"
-          max="{{product.max_amount}}"></range-slider>
+            <range-slider
+              step="5"
+              min="{{product.min_amount}}"
+              max="{{product.max_amount}}"
+              model="product.principal">
+            </range-slider>
 
-          <h2
-            ng-bind="product.payment_count"
-            ng-if="product.payment_cycle == 'days'"></h2>
+            <p class="h5">I am borrowing for</p>
+            <p class="h4">
+              <span ng-bind="product.payment_count"></span>
+              <span ng-bind="product.payment_cycle"></span>
+            </p>
 
-          <range-slider
-            ng-if="product.payment_cycle == 'days'"
-            model="product.payment_count"
-            step="1"
-            min="5"
-            max="30"></range-slider>
+            <range-slider
+              ng-if="product.payment_cycle == 'days'"
+              step="5"
+              min="5"
+              max="{{product.frequency}}"
+              model="product.payment_count">
+            </range-slider>
 
-      </div>
-    </uib-tab>
-  </uib-tabset>
+            <p>
+              <strong>Final Payment</strong><br>
+              <small ng-bind="product.max_duration|moment"></small>
+            </p>
+          </div>
+
+          <div class="col-6">
+            <!-- <pre ng-bind="product.instalments|json"></pre> -->
+            <div class="row">
+              <div class="col-6" ng-repeat="payment in product.instalments">
+                <div class="card my-2">
+                  <table class="table">
+                    <tr>
+                      <td><small class="text-muted">Repay</small></td>
+                      <td class="text-right">
+                        <small ng-bind="product.currency.SYM"></small>
+                        <small ng-bind="payment.amount_due"></small>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><small class="text-muted">Due</small></td>
+                      <td class="text-right"><small ng-bind="product.currency.SYM"></small><small ng-bind="payment.date|moment:'short'"></small></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div><!-- end of .row -->
+          </div><!-- end of .col-5 -->
+
+        </div><!-- end of .row -->
+      </div><!-- end of .tab-pane -->
+    </div><!-- end of .tab-content -->
+  </div><!-- end of .card-block -->
 </div>

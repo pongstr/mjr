@@ -15,13 +15,13 @@ module.exports = class Products {
    * @param   {String} id
    * @return  {Array}  returns processed product data
    */
-  constructor (context, id, calculate) {
+  constructor (context, id) {
     this.ctx = context
     this._id = id
 
     return Object.assign({}, context, {
       _id: id,
-      instalments: calculate ? this.getInstallments() : [],
+      instalments: this.getInstallments(),
       payment_count: this.getPaymentCount(context.productId, context.payment_cycle),
       max_duration: moment(this.getStartDate()).add(context.productId, 'months')
     })
@@ -33,7 +33,7 @@ module.exports = class Products {
    * @return {Object} returns a Date object
    */
   getStartDate () {
-    return moment()
+    return new Date()
   }
 
   /**
@@ -94,6 +94,10 @@ module.exports = class Products {
    *    current product.
    */
   getInstallments () {
+    if (this.ctx.payment_cycle === 'days') {
+      return null
+    }
+
     const that = this
     const ctx  = that.ctx
 
@@ -114,7 +118,7 @@ module.exports = class Products {
       : {label: 'months', length: ctx.productId}
 
     // Principal Amount
-    let principal = parseFloat(ctx.amount)
+    let principal = parseFloat(ctx.principal)
     // Interest Rate  (Monthly/Daily)
 
     let interest = this.getInterest()
@@ -122,9 +126,6 @@ module.exports = class Products {
     let payments = (term && term.label === 'days')
       ? parseFloat(term.length * days_in_year / 12)// parseFloat(date_between * days_in_year / 12)
       : parseFloat(date_between / 12) * 12
-
-    const _interest = (interest / term.length)
-    const _payments = term.length
 
     that.ctx.interest = (term && term.label === 'days')
       ? _interest : interest.toFixed(2)
@@ -139,27 +140,13 @@ module.exports = class Products {
       amount_interest = ((monthly * payments) - principal).toFixed(2)
     }
 
-    if (term && term.label === 'days') {
-      // @notes: Thanks to my wife for doing some math and dumbing it down
-      // so I can understand it and save me some frustration.
-      // http://i.imgur.com/9BHEghd.jpg
-      const s = (1 + _interest)
-      const f = (1 / Math.pow(s, _payments))
-      const c = (_interest * principal) / (1 - f)
-
-      amount_due      = (c).toFixed(2)
-      amount_total    = (c * _payments).toFixed(2)
-      amount_interest = ((c * _payments) - principal).toFixed(2)
-    }
-
     // Return the processed data here as a new array with appropriate
     // content and all that jazz....
     return [
       ...new Array(term.length).fill().map((obj, idx, arr) => {
+        console.log()
         return {
-          date_str: moment(start_date).add(idx, term.label).format('dddd, MMMM DD, YYYY'),
-          date_iso: moment(start_date).add(idx, term.label).toISOString(),
-          amount_display: ctx.currency.SYM + ' ' + amount_due,
+          date: moment(start_date).add(idx, term.label).toISOString(),
           amount_due, amount_total, amount_interest
         }
       })
