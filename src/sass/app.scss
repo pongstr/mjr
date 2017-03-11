@@ -1,0 +1,78 @@
+@import "bourbon";
+@import "bootstrap";
+
+html, body, body > [ui-view] {
+  height: 100%;
+  min-height: 100%;
+}
+
+.cover {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100%;
+  min-height: 100%;
+}
+
+.cover--background {
+  color: $gray-dark;
+  background-image: url('https://i.imgur.com/vdxzLfO.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  &:before,
+  &:after {
+    @include clearfix();
+    content: " ";
+  }
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.65;
+    background-color: #000;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.cover--fill {
+  height: 100%;
+  min-height: 100%;
+}
+
+.cover__inner {
+  flex-basis: 400px;
+  flex-grow: 0;
+  align-self: center;
+  padding-left: ($grid-gutter-width-base / 2);
+  padding-right: ($grid-gutter-width-base / 2);
+}
+
+.text-muted--opacity { opacity: 0.45; }
+
+.card--custom {
+  background-color: $gray-dark;
+  border-color: darken($gray-dark, 5%);
+  border-radius: 0;
+  box-shadow: 0 0 48px -6px rgba($gray-dark, 0.95);
+
+  .form-control {
+    color: $gray-lighter;
+    background-color: lighten($gray-dark, 5%);
+  }
+
+  .btn.btn-lg,
+  .form-control { border-radius: 3px; }
+}

@@ -1,13 +1,52 @@
 mjr
 ===
 
-#### Initialize Models
+### Getting Started
 
-Initialize Products Model:
+Go to [Firebase](https://firebase.google.com/) Sign Up and create an account.
+
+**Client Side**
+
+1. Checkout the [Web Setup](https://firebase.google.com/docs/web/setup)
+1. Open `src/app.js` and edit `lines:15-19`
+
+**Server Side**
+
+1. Checkout the [Admin Setup](https://firebase.google.com/docs/admin/setup)
+1. Open up `svr/app.firebase.json`
+1. Copy+Paste your credentials.
+
+#### Running the App
+
+```bash
+# Install App Dependencies and Open the App
+# https://127.0.0.1:5000/
+$ npm install && bower install && gulp
+```
+
+**Empty models?**
+
+Yep. You may populate `/api/products` endpoint with the data from `svr/init.js`
+which is processed by a middleware that calculates the variables given for this
+problem set.
 
 ```bash
 # Initialize models
 node svr/init.js
+```
+
+#### Gulp Tasks
+
+```bash
+# Builds the angular app to ./app, performs tasks:
+# - bower : bundles all vendor libraries
+# - app   : bundles app
+# - styles: bundles stylesheets
+$ gulp    # use --minify=false flag to skip minification
+
+# Watches the project directory for changes
+# and triggers default task.
+$ gulp dev # use --minify=false flag to skip minification
 ```
 
 #### Deploy to Heroku

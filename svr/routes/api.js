@@ -22,11 +22,12 @@ router.route('/products/').get((req, res, next) => {
     const snapshot = data.val()
     const products = []
 
-    // Process base product information
-    // into a robust useful initial data
-    // for display.
-    for (let id in snapshot) {
-      products.push(new Product(snapshot[id], id))
+    // Process base product information into a robust
+    // useful initial data for display.
+    if (snapshot) {
+      for (let id in snapshot) {
+        products.push(new Product(snapshot[id], id))
+      }
     }
 
     // Return processed products here.

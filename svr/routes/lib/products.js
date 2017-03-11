@@ -20,7 +20,7 @@ module.exports = class Products {
     this._id = id
 
     return Object.assign(context, {
-      _id: productId, instalments: this.getInstallments()
+      _id: id, instalments: this.getInstallments()
     })
   }
 

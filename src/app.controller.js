@@ -2,8 +2,13 @@
 
 export default class MainController {
   /* @ngInject */
-  constructor ($scope, $timeout, $state) {
+  constructor ($scope, $timeout, $state, $window, $firebaseObject, AuthService) {
     const main = this
+    const ref  = $window.firebase.database().ref('site')
+
+    // Fetch Site Info
+    this.site = $firebaseObject(ref)
+    this.$resolve = this.site.$loaded()
 
     this.$state   = $state
     this.$service = AuthService
@@ -29,8 +34,9 @@ export default class MainController {
         auth.$state.go('app.default')
       })
       .catch((err) => {
-        auth.credentials = null
-        auth.toggleNotify(err.message)
+        auth.credentials = {
+          error: err.message
+        }
       })
     }
   }
