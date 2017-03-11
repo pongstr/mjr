@@ -3,9 +3,11 @@ import authCheck      from './config/auth-check'
 import configRoute    from './config/routes'
 import configRouters  from './config/router'
 import initTemplates  from './templates/index'
+import createResource from './services/api'
 
 import MainController from './app.controller'
 import AuthService    from './services/auth'
+import LoanSlider     from './components/loan-slider/index'
 
 // #==
 // See Firebase Documentation for Web Setup
@@ -40,4 +42,6 @@ const app = angular
   .config(configRouters)   // config : init all available routes w/in the app.
 
 app.controller('Ctrl.Main', MainController)
+app.component('loanSlider', LoanSlider)
+app.factory('products', createResource('products'))
 app.service('AuthService', AuthService)
