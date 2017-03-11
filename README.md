@@ -1,6 +1,15 @@
 mjr
 ===
 
+#### Initialize Models
+
+Initialize Products Model:
+
+```bash
+# Initialize models
+node svr/init.js
+```
+
 #### Deploy to Heroku
 
 ```bash
