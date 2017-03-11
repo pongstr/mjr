@@ -1,6 +1,6 @@
 {
-  "name": "dashboard-tools",
-  "version": "0.0.3",
+  "name": "mjar",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "preinstall": "npm install -g bower gulp main-bower-files",
