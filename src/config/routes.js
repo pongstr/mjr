@@ -27,7 +27,7 @@ export default function routePaths ($stateProvider, $urlRouterProvider) {
       url: '',
       resolve: {currentAuth: authRequired},
       views: {
-        'content@app': {template: 'hello' }
+        'content@app': {component: 'loanSlider' }
       }
     })
 
