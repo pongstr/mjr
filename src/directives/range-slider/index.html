@@ -1,0 +1,26 @@
+
+<div class="d-block">
+
+  <!-- Range Slider  -->
+  <div class="d-inline-block">
+    <!-- Decrement Range Slider -->
+    <button type="button" class="btn btn-outline-primary"
+      ng-disabled="slider.model == slider.min"
+      ng-click="slider.decrease()"><i class="ion-minus"></i></button>
+  </div>
+
+  <div class="d-inline-block" style="padding-top: 5px; padding-left: 15px; padding-right: 15px;">
+    <input class="range-control" type="range"
+      ng-model="slider.model"
+      step="1" min="{{slider.min}}" max="{{slider.max}}">
+  </div>
+
+
+  <div class="d-inline-block">
+    <!-- Increment Range Slider -->
+    <button type="button" class="btn btn-outline-primary"
+      ng-disabled="slider.model == slider.max"
+      ng-click="slider.increase()"><i class="ion-plus"></i></button>
+  </div>
+
+</div><!-- end of .d-block -->
