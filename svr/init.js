@@ -12,33 +12,33 @@ const productsModel = [
     description: 'Borrow up to £{{ max_amount }}',
     created_at: created,
     updated_at: created,
-    amount: 500,
+    principal:  500,
     min_amount: 100,
     max_amount: 925,
-    currency: { ISO: 'GBP', SYM: '£'},
-    payment_cycle: 'daily'
+    payment_cycle: 'days',
+    currency: { ISO: 'GBP', SYM: '£' }
   }, {
     productId: 2,
     name: '2 Months',
     description: 'Borrow up to £{{ max_amount }}',
     created_at: created,
     updated_at: created,
-    amount: 500,
+    principal:  500,
     min_amount: 100,
     max_amount: 925,
-    currency: { ISO: 'GBP', SYM: '£'},
-    payment_cycle: 'monthly'
+    payment_cycle: 'months',
+    currency: { ISO: 'GBP', SYM: '£' }
   }, {
     productId: 3,
     name: '3 Months',
     description: 'Borrow up to £{{ max_amount }}',
     created_at: created,
     updated_at: created,
-    amount: 500,
+    principal:  500,
     min_amount: 100,
     max_amount: 925,
-    currency: { ISO: 'GBP', SYM: '£'},
-    payment_cycle: 'monthly'
+    payment_cycle: 'months',
+    currency: { ISO: 'GBP', SYM: '£' }
   }
 ]
 

@@ -15,12 +15,15 @@ module.exports = class Products {
    * @param   {String} id
    * @return  {Array}  returns processed product data
    */
-  constructor (context, id) {
+  constructor (context, id, calculate) {
     this.ctx = context
     this._id = id
 
-    return Object.assign(context, {
-      _id: id, instalments: this.getInstallments()
+    return Object.assign({}, context, {
+      _id: id,
+      instalments: calculate ? this.getInstallments() : [],
+      payment_count: this.getPaymentCount(context.productId, context.payment_cycle),
+      max_duration: moment(this.getStartDate()).add(context.productId, 'months')
     })
   }
 
@@ -30,7 +33,7 @@ module.exports = class Products {
    * @return {Object} returns a Date object
    */
   getStartDate () {
-    return new Date()
+    return moment()
   }
 
   /**
@@ -65,6 +68,17 @@ module.exports = class Products {
     // 0.8 is a static value given
     // for this problem set.
     return (0.8 / 100) / 12 * 365
+  }
+
+  /**
+   * @method  GetPaymentCount
+   * @desc    payment cycle in number
+   * @return  {Number} number of days or months
+   */
+  getPaymentCount (product, frequency) {
+    const start_date = moment(this.getStartDate())
+    const end_date   = moment(this.getStartDate()).add(product, 'months')
+    return end_date.diff(start_date, frequency)
   }
 
   /**

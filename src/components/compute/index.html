@@ -1,0 +1,28 @@
+<div class="card">
+  <uib-tabset>
+    <uib-tab
+      ng-repeat="product in cm.collection"
+      heading="{{product.name}}">
+      <div class="d-block pa-4">
+
+        <h2 ng-bind="product.principal"></h2>
+        <range-slider model="product.principal"
+          step="5"
+          min="{{product.min_amount}}"
+          max="{{product.max_amount}}"></range-slider>
+
+          <h2
+            ng-bind="product.payment_count"
+            ng-if="product.payment_cycle == 'days'"></h2>
+
+          <range-slider
+            ng-if="product.payment_cycle == 'days'"
+            model="product.payment_count"
+            step="1"
+            min="5"
+            max="30"></range-slider>
+
+      </div>
+    </uib-tab>
+  </uib-tabset>
+</div>
