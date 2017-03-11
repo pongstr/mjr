@@ -1,0 +1,16 @@
+# humanstxt.org/
+/* TEAM */
+
+
+Dashboard Tools.
+Site: tools.pongstr.io
+Twitter: @pongstr
+Location: Tallinn, Estonia.
+
+Thanks: cloudflare.com, firebase.com, heroku.com, namecheap.com, github.com
+
+/* SITE */
+Last update: 2017/02/16
+Standards: HTML5, CSS3, Javascript Standard
+Components: Sass, Node.js, Npm, ExpressJS, AngularJS, Firebase, Webpack, Gulp, Bower
+Software: Atom, Git, Node.js, Firebase
