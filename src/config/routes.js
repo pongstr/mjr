@@ -22,6 +22,15 @@ export default function routePaths ($stateProvider, $urlRouterProvider) {
       templateUrl: 'template.html'
     })
 
+    // Actual Application Root Route
+    .state('app.default', {
+      url: '',
+      resolve: {currentAuth: authRequired},
+      views: {
+        'content@app': {template: 'hello' }
+      }
+    })
+
     // Application Login Route
     .state('login', {
       url: '/login/',

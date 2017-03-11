@@ -47,6 +47,10 @@ html, body, body > [ui-view] {
   }
 }
 
+.cover--content {
+  // Custom Styles here?
+}
+
 .cover--fill {
   height: 100%;
   min-height: 100%;
@@ -58,6 +62,16 @@ html, body, body > [ui-view] {
   align-self: center;
   padding-left: ($grid-gutter-width-base / 2);
   padding-right: ($grid-gutter-width-base / 2);
+}
+
+.cover__inner--content {
+  @include media-breakpoint-down(sm) {
+    flex-basis: 90%;
+  }
+
+  @include media-breakpoint-up(md) {
+    flex-basis: 75%;
+  }
 }
 
 .text-muted--opacity { opacity: 0.45; }
