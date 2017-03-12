@@ -5,6 +5,7 @@
   <div class="d-inline-block">
     <!-- Decrement Range Slider -->
     <button type="button" class="btn btn-outline-primary"
+      ng-disabled="slider.model == slider.min"
       ng-click="slider.decrease()"><i class="ion-minus"></i></button>
   </div>
 
@@ -18,6 +19,7 @@
   <div class="d-inline-block">
     <!-- Increment Range Slider -->
     <button type="button" class="btn btn-outline-primary"
+      ng-disabled="slider.model == slider.max"
       ng-click="slider.increase()"><i class="ion-plus"></i></button>
   </div>
 

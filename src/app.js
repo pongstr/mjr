@@ -10,7 +10,7 @@ import AuthService    from './services/auth'
 
 import rangeSlider    from './directives/range-slider/index'
 import {LoanCompute}  from './components/compute/index'
-import {momentFilter}      from './app.utils'
+import {momentFilter} from './app.utils'
 
 // #==
 // See Firebase Documentation for Web Setup

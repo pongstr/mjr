@@ -3,7 +3,7 @@
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item" ng-repeat="product in cm.collection">
         <a href="#"
-          ng-click="cm.selectProduct(product, $index)"
+          ng-click="cm.selectProduct($index)"
           ng-class="cm.$selected == $index ? 'nav-link active ' : 'nav-link'">
           <span ng-bind="product.name"></span>
         </a>
@@ -16,39 +16,40 @@
         ng-repeat="product in cm.collection track by $index"
         ng-class="cm.$selected == $index ? 'tab-pane active' : 'tab-pane'">
         <div class="row">
+
           <div class="col-6 text-center">
             <h4 class="lead">I would like to Borrow</h4>
-            <h5 class="h4" ng-bind="product.currency.SYM + product.principal"></h5>
+            <h5 class="h4" ng-bind="cm.ngModel.currency.SYM + product.principal"></h5>
 
             <range-slider
               step="5"
-              min="{{product.min_amount}}"
-              max="{{product.max_amount}}"
-              model="product.principal">
+              min="{{cm.ngModel.min_amount}}"
+              max="{{cm.ngModel.max_amount}}"
+              model="cm.ngModel.principal">
             </range-slider>
 
             <p class="h5">I am borrowing for</p>
             <p class="h4">
-              <span ng-bind="product.payment_count"></span>
-              <span ng-bind="product.payment_cycle"></span>
+              <span ng-bind="cm.ngModel.payment_count"></span>
+              <span ng-bind="cm.ngModel.payment_cycle"></span>
             </p>
 
             <range-slider
-              ng-if="product.payment_cycle == 'days'"
+              ng-if="cm.ngModel.payment_cycle == 'days'"
               step="5"
               min="5"
-              max="{{product.frequency}}"
-              model="product.payment_count">
+              max="{{cm.ngModel.frequency}}"
+              model="cm.ngModel.payment_count">
             </range-slider>
 
             <p>
               <strong>Final Payment</strong><br>
-              <small ng-bind="product.max_duration|moment"></small>
+              <small ng-bind="cm.ngModel.max_duration|moment"></small>
             </p>
-          </div>
+          </div><!-- end of .col-6 -->
 
           <div class="col-6">
-            <!-- <pre ng-bind="product.instalments|json"></pre> -->
+
             <div class="row">
               <div class="col-6" ng-repeat="payment in product.instalments">
                 <div class="card my-2">
@@ -62,16 +63,34 @@
                     </tr>
                     <tr>
                       <td><small class="text-muted">Due</small></td>
-                      <td class="text-right"><small ng-bind="product.currency.SYM"></small><small ng-bind="payment.date|moment:'short'"></small></td>
+                      <td class="text-right">
+                        <small ng-bind="payment.date|moment:'short'"></small>
+                      </td>
                     </tr>
                   </table>
                 </div>
               </div>
-            </div><!-- end of .row -->
-          </div><!-- end of .col-5 -->
+            </div>
+
+            <p>
+              <strong>Borrow:</strong>
+              <span ng-bind="cm.ngModel.currency.SYM"></span>
+              <span ng-bind="cm.ngModel.principal"></span>
+
+              <strong>Interest:</strong>
+              <span ng-bind="cm.ngModel.currency.SYM"></span>
+              <span ng-bind="cm.ngModel.interest"></span>
+            </p>
+
+            <p>
+              <strong>Total Repay</strong>
+              <strong ng-bind="cm.ngModel.currency.SYM"></strong>
+              <strong ng-bind="cm.ngModel.amount_total"></strong>
+            </p>
+          </div><!-- end of .col-6 -->
 
         </div><!-- end of .row -->
       </div><!-- end of .tab-pane -->
     </div><!-- end of .tab-content -->
-  </div><!-- end of .card-block -->
+  </div><!--  end of .card-block -->
 </div>
