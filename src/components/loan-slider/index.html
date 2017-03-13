@@ -1,0 +1,13 @@
+<div class="card">
+  <uib-tabset>
+    <uib-tab
+      ng-repeat="product in slider.collection"
+      heading="{{product.name}}">
+      <div class="d-block pa-4">
+
+        <h2 ng-bind="product.name"></h2>
+
+      </div>
+    </uib-tab>
+  </uib-tabset>
+</div>
