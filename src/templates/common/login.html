@@ -1,0 +1,46 @@
+<div class="cover cover--background">
+  <div class="cover__inner">
+
+    <form class="card card-inverse card--custom" name="login" ng-submit="main.login(login)">
+      <div class="card-block">
+        <div class="d-block text-center">
+          <h1 class="my-4">
+            <i class="ion-ios-flask-outline display-4"></i>
+          </h1>
+          <br>
+        </div>
+
+        <div ng-if="main.credentials.error" uib-alert ng-class="'alert-danger'">
+          <small ng-bind="main.credentials.error"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="sr-only" for="email">Email Address</label>
+          <input class="form-control form-control-lg" id="email" type="email" ng-model="main.credentials.email" placeholder="Email Address" required>
+          <small class="text-muted text-muted--opacity">Please enter your email address above.</small>
+        </div>
+
+        <!-- <div ng-bind="main.site|json"></div> -->
+        <div class="form-group mb-4">
+          <label class="sr-only" for="password">Password</label>
+          <input class="form-control form-control-lg" id="password" type="password" ng-model="main.credentials.password" placeholder="Password" required>
+          <small class="text-muted text-muted--opacity">Please enter your password above.</small>
+        </div>
+
+        <div class="form-group pt-4 pb-4 text-center">
+          <button type="submit" class="btn btn-lg btn-block btn-success">Sign In</button>
+        </div>
+
+        <hr style="margin-left: -25px; margin-right: -25px;">
+
+        <div class="d-block text-center">
+          <small class="text-muted">
+            Trouble signing in? You may request an access to see this demo.
+            <a href="https://twitter.com/pongstr">@pongstr</a>
+          </small>
+        </div>
+      </div><!-- end of .card-block -->
+    </form><!-- end of form.card -->
+
+  </div>
+</div>
