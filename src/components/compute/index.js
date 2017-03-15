@@ -11,6 +11,11 @@ class ComputeController {
     this.$service = products
     this.$moment  = $window.moment
     this.collection = null
+    this.cardTheme = [
+      'card--blue',
+      'card--yellow',
+      'card--green'
+    ]
   }
 
   // Bootstrap Controller

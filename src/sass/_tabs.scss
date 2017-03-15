@@ -1,0 +1,100 @@
+// #==
+// Tab Themes
+
+$blue:    #96d2f0;
+$green:   #a0c896;
+$yellow:  lighten(#f1c40f, 18%);
+
+
+@mixin card-modifier ($color) {
+  & {
+    border-width: 2px;
+    border-color: darken($color, 16%);
+  }
+
+  & .card-header {
+    border-bottom: 2px solid #fff;
+    background-color: darken($color, 14%);
+    transition: all .2s cubic-bezier(0.4, 0.0, 0.6, 1);
+  }
+
+  & .tab-content {
+    transition: all .2s cubic-bezier(0.4, 0.0, 0.6, 1);
+    background-color: $color;
+  }
+
+
+  .card {
+    border-width: 2px;
+    border-color: #fff;
+  }
+
+  .card-block {
+    background-color: lighten($color, 18%);
+  }
+
+  .card-header-tabs .nav-item {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .text-muted { color: darken($color, 45%) !important; }
+
+  .row--custom > div > .d-flex {
+    margin: 1px;
+    // border: 2px color $color !important;
+    background-color: rgba(#fff, 0.35);
+  }
+}
+
+.card--modifier {
+  transition: all .2s cubic-bezier(0.4, 0.0, 0.6, 1);
+  &.card--blue    { @include card-modifier($blue); }
+  &.card--green   { @include card-modifier($green); }
+  &.card--yellow  { @include card-modifier($yellow); }
+}
+
+.card-header-tabs--modifier .nav-item {
+  & {
+    margin-bottom: -2px;
+  }
+
+  & > .nav-link {
+    color: #000;
+    border-width: 2px;
+    border-color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  &:nth-of-type(1) > .nav-link {
+    background-color: $blue;
+    border-width: 2px;
+    border-color: #fff;
+  }
+
+  &:nth-of-type(1) > .nav-link.active {
+    background-color: $blue;
+    border-bottom-color: $blue;
+  }
+
+  &:nth-of-type(2) > .nav-link {
+    background-color: $yellow;
+  }
+
+  &:nth-of-type(2) > .nav-link.active {
+    background-color: $yellow;
+    border-bottom-color: $yellow;
+  }
+
+  &:nth-of-type(3) > .nav-link {
+    background-color: $green;
+    border-width: 2px;
+    border-color: #fff;
+  }
+
+  &:nth-of-type(3) > .nav-link.active {
+    background-color: $green;
+    border-bottom-color: $green;
+  }
+}

@@ -27,12 +27,21 @@ export default function rangeSlider ($rootScope) {
       }
     },
     link: (scope, element, attrs) => {
-      let cleanUp = $rootScope.$on('$stateChangeStart', function () {
+      let _element = angular.element(element)
+      let _cleanup = $rootScope.$on('$stateChangeStart', function () {
         element.remove()
         element.parent().remove()
         scope.$destroy()
       })
-      scope.$on('$destroy', cleanUp)
+
+      let $range = angular.element(document).find('.range-control')
+
+      $range.on('change', (e) => {
+        console.log(e.target)
+      })
+
+
+      scope.$on('$destroy', _cleanup)
     }
   }
 }

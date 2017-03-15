@@ -1,6 +1,6 @@
-<div class="card">
+<div class="card card--modifier" ng-class="cm.cardTheme[cm.$selected]">
   <div class="card-header">
-    <ul class="nav nav-tabs card-header-tabs">
+    <ul class="nav nav-tabs justify-content-center card-header-tabs card-header-tabs--modifier">
       <li class="nav-item" ng-repeat="product in cm.collection">
         <a href="#"
           ng-click="cm.selectProduct($index)"
@@ -10,17 +10,15 @@
       </li>
     </ul>
   </div>
-  <div class="card-block">
-    <div class="tab-content">
-      <div
-        ng-repeat="product in cm.collection track by $index"
-        ng-class="cm.$selected == $index ? 'tab-pane active' : 'tab-pane'">
-        <div class="row">
-
-          <div class="col-6 text-center">
-            <h4 class="lead">I would like to Borrow</h4>
-            <h5 class="h4" ng-bind="cm.ngModel.currency.SYM + product.principal"></h5>
-
+  <div class="tab-content">
+    <div
+      ng-repeat="product in cm.collection track by $index"
+      ng-class="cm.$selected == $index ? 'tab-pane active' : 'tab-pane'">
+      <div class="row no-gutters align-items-top">
+        <div class="col-lg-6 py-4 px-4 text-center">
+          <div class="card card-block">
+            <h4 class="lead">I want to Borrow</h4>
+            <h5 class="h2" ng-bind="cm.ngModel.currency.SYM + product.principal"></h5>
             <range-slider
               step="5"
               min="{{cm.ngModel.min_amount}}"
@@ -46,51 +44,42 @@
               <strong>Final Payment</strong><br>
               <small ng-bind="cm.ngModel.max_duration|moment"></small>
             </p>
-          </div><!-- end of .col-6 -->
+          </div><!-- end of .card.card-block -->
+        </div><!-- end of .col.col-5 -->
 
-          <div class="col-6">
 
-            <div class="row">
-              <div class="col-6" ng-repeat="payment in product.instalments">
-                <div class="card my-2">
-                  <table class="table">
-                    <tr>
-                      <td><small class="text-muted">Repay</small></td>
-                      <td class="text-right">
-                        <small ng-bind="product.currency.SYM"></small>
-                        <small ng-bind="payment.amount_due"></small>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><small class="text-muted">Due</small></td>
-                      <td class="text-right">
-                        <small ng-bind="payment.date|moment:'short'"></small>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
+        <div class="col-lg-6 py-5 px-4 m-y-5">
+          <h3 class="text-center">Example Payment Schedule*</h3>
 
-            <p>
-              <strong>Borrow:</strong>
-              <span ng-bind="cm.ngModel.currency.SYM"></span>
-              <span ng-bind="cm.ngModel.principal"></span>
+          <br>
+          <sched-cards
+            model="cm.ngModel.instalments"
+            static="{{cm.ngModel.currency.SYM}}">
+          </sched-cards>
+          <br>
 
-              <strong>Interest:</strong>
-              <span ng-bind="cm.ngModel.currency.SYM"></span>
-              <span ng-bind="cm.ngModel.interest"></span>
-            </p>
+          <p class="text-center h5">
+            <span>Borrow:</span>
+            <strong ng-bind="cm.ngModel.currency.SYM"></strong><strong ng-bind="cm.ngModel.principal"></strong>
 
-            <p>
-              <strong>Total Repay</strong>
-              <strong ng-bind="cm.ngModel.currency.SYM"></strong>
-              <strong ng-bind="cm.ngModel.amount_total"></strong>
-            </p>
-          </div><!-- end of .col-6 -->
+            <span>Interest:</span>
+            <strong ng-bind="cm.ngModel.currency.SYM"></strong><strong ng-bind="cm.ngModel.interest"></strong>
+          </p>
 
-        </div><!-- end of .row -->
-      </div><!-- end of .tab-pane -->
-    </div><!-- end of .tab-content -->
-  </div><!--  end of .card-block -->
+          <p class="text-center">
+            <strong>Total Repay</strong>
+            <strong ng-bind="cm.ngModel.currency.SYM"></strong>
+            <strong ng-bind="cm.ngModel.amount_total"></strong>
+          </p>
+
+          <p class="text-center">
+            <small class="text-muted">
+              * Amounts and instalment dates may differ slightly in the final
+              loan offer as we collect each monthly payment on your pay date.
+            </small>
+          </p>
+        </div><!-- end of .col-lg-7 -->
+      </div>
+    </div>
+  </div><!-- end of .tab-content -->
 </div>
