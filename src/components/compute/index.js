@@ -78,7 +78,7 @@ class ComputeController {
 
   // Destroy Model
   $onDestroy () {
-    this.model = null
+    this.ngModel = null
     this.$service = null
   }
 

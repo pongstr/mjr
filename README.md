@@ -1,6 +1,9 @@
 mjr
 ===
 
+This is a skill test exam I took for MyJar. But did not pass because <br>
+they think it's over complicated. [**THIS IS THE ORIGINAL CODEBASE FOR THEIR TEST**](https://github.com/igorrootsi/myjar-test).
+
 ### Getting Started
 
 Go to [Firebase](https://firebase.google.com/) Sign Up and create an account.
